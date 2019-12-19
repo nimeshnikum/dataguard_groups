@@ -3,6 +3,8 @@ require 'securerandom'
 class Employee < ApplicationRecord
   belongs_to :user
   belongs_to :department
+  has_many :event_attendees
+  has_many :events, through: :event_attendees
 
   def self.seed_one(seq)
     ActiveRecord::Base.transaction do

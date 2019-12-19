@@ -1,0 +1,18 @@
+<h3> Event Title: <%= @event.name %></h3>
+
+<% if @groups.any? %>
+  <% @groups.each do |group| %>
+    <p>Group Name: <%= group.name %></p>
+
+    <p>Members</p>
+    <ul>
+      <% group.event_group_members.each do |member| %>
+        <li style="<%= member.is_leader? ? 'font-weight: bold' : '' %>">
+          <%= member.event_attendee.employee.name %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% else %>
+  <%= link_to('Generate Groups', generate_groups_event_path(@event)) %>
+<% end %>

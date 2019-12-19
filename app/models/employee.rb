@@ -6,6 +6,14 @@ class Employee < ApplicationRecord
   has_many :event_attendees
   has_many :events, through: :event_attendees
 
+  def leader_history?
+    event_attendees.limit(3).any? { |ea| leader_at_event?(ea) }
+  end
+
+  def leader_at_event?(event_attendee)
+    event_attendee.event_group_members.as_leader.present?
+  end
+
   def self.seed_one(seq)
     ActiveRecord::Base.transaction do
       department_ids = Department.ids

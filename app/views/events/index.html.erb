@@ -1,0 +1,27 @@
+<div class="">
+  <h3>Upcoming Events</h3>
+  <% if @upcoming_events.present? %>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Mark as Completed</th>
+      </tr>
+      <% @upcoming_events.each do |event| %>
+        <tr>
+          <td><%= link_to(event.name, event_path(event)) %></td>
+          <td><%= event.date %></td>
+          <td><%= check_box :event, :completed, disabled: true %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    No Upcoming Events
+  <% end %>
+
+</div>
+
+<div class="">
+  <h3>Past Events</h3>
+  # Past events will be displayed here...
+</div>
